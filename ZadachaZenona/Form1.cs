@@ -10,9 +10,12 @@ namespace ZadachaZenona
         {
             InitializeComponent();
         }
-        double vAxiles, vCherapasha;
-        double x, y;
-        double time, dTime;
+        double vAxiles;
+        double vCherapasha;
+        double x;
+        double y;
+        double time;
+        double dTime;
         double difference;
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
