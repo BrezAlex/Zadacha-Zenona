@@ -11,7 +11,7 @@ namespace ZadachaZenona
             InitializeComponent();
         }
 
-        private double _speedAxiles;  //
+        private double _speedAxiles;
         private double _speedCherapasha;
         private double _x;
         private double _y;
@@ -26,17 +26,26 @@ namespace ZadachaZenona
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (_x > Width) _x = -100;
-            if (_y > Width) _y = -100;
+            ZamenaIfiRefresh();
             _x += _speedAxiles;
             _y += _speedCherapasha;
+        }
+
+        private void ZamenaIfiRefresh()
+        {
+            if (_x > Width) _x = -100;
+            if (_y > Width) _y = -100;
             pictureBox1.Refresh();
+        }
+
+        private void Znachenie()
+        {
+            double.TryParse(textBox1.Text, out _speedAxiles);
+            double.TryParse(textBox2.Text, out _speedCherapasha);
         }
         private void button1_MouseClick(object sender, MouseEventArgs e)
         {
-           
-            double.TryParse(textBox1.Text, out _speedAxiles);
-            double.TryParse(textBox2.Text, out _speedCherapasha);           
+            Znachenie();
             timer1.Start();
         }
 
@@ -47,29 +56,19 @@ namespace ZadachaZenona
             e.Handled = true;            
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar)) return;
-            if (e.KeyChar == Convert.ToChar(Keys.Back)) return;
-            e.Handled = true;            
-        }
-
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (_x > Width) _x = -100;
-            if (_y > Width) _y = -100;
+            ZamenaIfiRefresh();
             double difference = _y - _x;
             double time = difference / _speedAxiles;
             double dTime = time / 150;
             _x += _speedAxiles * dTime;
             _y += _speedCherapasha * dTime;
-            pictureBox1.Refresh();
         }
 
         private void button2_MouseClick(object sender, MouseEventArgs e)
         {
-            double.TryParse(textBox1.Text, out _speedAxiles);
-            double.TryParse(textBox2.Text, out _speedCherapasha);
+            Znachenie();
             timer2.Start();
         }
         private void button3_MouseClick(object sender, MouseEventArgs e)
