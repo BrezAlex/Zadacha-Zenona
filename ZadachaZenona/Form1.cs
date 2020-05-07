@@ -26,26 +26,28 @@ namespace ZadachaZenona
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ZamenaIfiRefresh();
-            _x += _speedAxiles;
-            _y += _speedCherapasha;
-        }
-
-        private void ZamenaIfiRefresh()
-        {
             if (_x > Width) _x = -100;
             if (_y > Width) _y = -100;
             pictureBox1.Refresh();
+            if (checkBox1.Checked)
+            {
+                double difference = _y - _x;
+                double time = difference / _speedAxiles;
+                double dTime = time / 150;
+                _x += _speedAxiles * dTime;
+                _y += _speedCherapasha * dTime;
+            }
+            else
+            {
+                _x += _speedAxiles;
+                _y += _speedCherapasha;
+            }
         }
 
-        private void Znachenie()
+        private void button1_MouseClick(object sender, MouseEventArgs e)
         {
             double.TryParse(textBox1.Text, out _speedAxiles);
             double.TryParse(textBox2.Text, out _speedCherapasha);
-        }
-        private void button1_MouseClick(object sender, MouseEventArgs e)
-        {
-            Znachenie();
             timer1.Start();
         }
 
@@ -56,25 +58,9 @@ namespace ZadachaZenona
             e.Handled = true;            
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            ZamenaIfiRefresh();
-            double difference = _y - _x;
-            double time = difference / _speedAxiles;
-            double dTime = time / 150;
-            _x += _speedAxiles * dTime;
-            _y += _speedCherapasha * dTime;
-        }
-
-        private void button2_MouseClick(object sender, MouseEventArgs e)
-        {
-            Znachenie();
-            timer2.Start();
-        }
         private void button3_MouseClick(object sender, MouseEventArgs e)
         {            
             timer1.Stop();
-            timer2.Stop();
         } 
         
     }
